@@ -1,5 +1,5 @@
 /**
- *  Object.watch - Property change watching with ECMAScript 5. Boom.
+ *  Object._watch - Property change watching with ECMAScript 5. Boom.
  *  Copyright (C) 2013  Lee Driscoll
  *
  *  This program is free software: you can redistribute it and/or modify
