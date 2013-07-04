@@ -1,10 +1,10 @@
-Object.watch
+Object._watch
 ============
 
 Object property watching using ECMAScript 5
 
 
-Object.watch is a provided method in Gekko and it's awesome.
+Object.prototype.watch is a provided method in Gekko and it's awesome.
 
 But why not spread the love?
 
@@ -18,7 +18,7 @@ Will not work in IE8 or lower.
 ```
 var w = new Watchable({a: 1});
 
-print( w.a ); // prints 1;
+console.log( w.a ); // Logs: 1
 
 w._watch('a', function(property, oldValue, newValue){
     console.log(property, oldValue, newValue);
