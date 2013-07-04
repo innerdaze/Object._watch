@@ -10,7 +10,10 @@ But why not spread the love?
 
 If your browser supports Object.defineProperty (it definitely should) then you can have Object.watch too =]
 
-Will not work in IE8 or lower.
+_Will not work in IE8 or lower._
+
+*Currently minifies to 0.929kb*
+
 
 ##How to Use
 
