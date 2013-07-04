@@ -12,7 +12,7 @@ If your browser supports Object.defineProperty (it definitely should) then you c
 
 ##How to Use
 
-#Local Watching
+###Local Watching
 ```
 var w = new Watchable({a: 1});
 
@@ -30,7 +30,7 @@ w.a = 'test2'; // returns 'test2'
 
 ```
 
-#Remote Watching
+###Remote Watching
 ```
 var o = {x: 1};
 
