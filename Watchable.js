@@ -1,6 +1,6 @@
 var Watchable = function (props) {
 
-    return Object.create(props, {
+    return Object.create(props||{}, {
         __watchableWatchers: {
             configurable: false,
             value: {}
@@ -34,28 +34,30 @@ var Watchable = function (props) {
         
         watch: {
             configurable: false,
-            value: function (propertyName, callback, scope) {
-
-                if (this[propertyName] != undefined) {
-                    this.__watchableValues[propertyName] = this[propertyName];
+            value: function (propertyName, callback, scope, targetObject) {
+                
+                var me  = this;
+                
+                if ((targetObject||me)[propertyName] != undefined) {
+                    me.__watchableValues[propertyName] = (targetObject||me)[propertyName];
                 }
 
-                if (!this.watchers[propertyName]) {
+                if (!me.__watchableWatchers[propertyName]) {
 
-                    this.watchers[propertyName] = [];
+                    me.__watchableWatchers[propertyName] = [];
 
-                    Object.defineProperty(this, propertyName, {
+                    Object.defineProperty(targetObject||me, propertyName, {
                         set: function (value) {
-                            this.__watchableNotify(propertyName, this[propertyName], value);
-                            this.__watchableValues[propertyName] = value;
+                            me.__watchableNotify(propertyName, (targetObject||me)[propertyName], value);
+                            me.__watchableValues[propertyName] = value;
                         },
                         get: function () {
-                            return this.__watchableValues[propertyName];
+                            return me.__watchableValues[propertyName];
                         }
                     });
                 }
 
-                this.__watchableWatchers[propertyName].push(callback.bind(this || scope));
+                me.__watchableWatchers[propertyName].push(callback.bind(me || scope));
             }
         }
     });
