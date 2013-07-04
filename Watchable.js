@@ -1,21 +1,21 @@
 var Watchable = function (props) {
 
     return Object.create(props, {
-        watchers: {
+        __watchableWatchers: {
             configurable: false,
             value: {}
         },
 
-        values: {
+        __watchableValues: {
             configurable: false,
             value: {}
         },
 
-        notify: {
+        __watchableNotify: {
             configurable: false,
             value: function (property, oldValue, newValue) {
                 var ln, i = 0,
-                    notifiers = this.watchers[property];
+                    notifiers = this.__watchableWatchers[property];
 
                 if ((ln = notifiers.length)) {
                     for (; i < ln; i++) {
@@ -30,7 +30,7 @@ var Watchable = function (props) {
             value: function (propertyName, callback, scope) {
 
                 if (this[propertyName] != undefined) {
-                    this.values[propertyName] = this[propertyName];
+                    this.__watchableValues[propertyName] = this[propertyName];
                 }
 
                 if (!this.watchers[propertyName]) {
@@ -39,16 +39,16 @@ var Watchable = function (props) {
 
                     Object.defineProperty(this, propertyName, {
                         set: function (value) {
-                            this.notify(propertyName, this[propertyName], value);
-                            this.values[propertyName] = value;
+                            this.__watchableNotify(propertyName, this[propertyName], value);
+                            this.__watchableValues[propertyName] = value;
                         },
                         get: function () {
-                            return this.values[propertyName];
+                            return this.__watchableValues[propertyName];
                         }
                     });
                 }
 
-                this.watchers[propertyName].push(callback.bind(this || scope));
+                this.__watchableWatchers[propertyName].push(callback.bind(this || scope));
             }
         }
     });
