@@ -6,7 +6,10 @@
  * To change this template use File | Settings | File Templates.
  */
 (function(){
-    var w = new Watchable({a: 1});
+
+    console.log('Tests should complete in a numbered sequence.');
+
+    var watchable = new Watchable({a: 1});
 
     var callbackTag;
 
@@ -15,19 +18,29 @@
         console.log(callbackTag, ' || Property: ', propertyName, ' | Old Value: ', oldValue, ' | New Value: ', newValue);
     };
 
-    w._watch('a', defaultWatchCallback);
+    watchable._watch('a', defaultWatchCallback);
 
-    callbackTag = 'LOCAL WATCH';
+    callbackTag = '1. LOCAL WATCH';
 
-    w.a = 2;
+    watchable.a = 2;
 
     // Remote Watching
 
-    var o = {x: 5}; // Foreign Object
+    var foreignObject = {x: 5}; // Foreign Object
 
-    w._watch('x', defaultWatchCallback, null, o);
+    watchable._watch('x', defaultWatchCallback, null, foreignObject);
 
-    callbackTag = 'REMOTE WATCH';
+    callbackTag = '2. REMOTE WATCH';
 
-    o.x = 10;
+    foreignObject.x = 10;
+
+    // Testing object sand-boxing
+
+    foreignObject.a = '';
+
+    watchable._watch('a', defaultWatchCallback, null, foreignObject);
+
+    callbackTag = '3. SAND-BOXED WATCH';
+
+    foreignObject.a = 'foreign';
 })();
