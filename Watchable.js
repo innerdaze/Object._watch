@@ -25,6 +25,13 @@ var Watchable = function (props) {
             }
         },
 
+        unwatch: {
+            configurable: false,
+            value: function(propertyName){
+                this.__watchableWatchers[propertyName] = [];
+            }
+        },
+        
         watch: {
             configurable: false,
             value: function (propertyName, callback, scope) {
