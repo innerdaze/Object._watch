@@ -15,13 +15,18 @@ If your browser supports Object.defineProperty (it definitely should) then you c
 ```
 var w = new Watchable({a: 1});
 
-print( w.a ); // returns 1;
+print( w.a ); // prints 1;
 
 w.watch('a', function(property, oldValue, newValue){
     print('Property: ' + property + ', Old: ' + oldValue + ', New: ' + newValue);
 });
 
-w.a = 'test'; // returns Property: a, Old: 1, New: 'test'
+w.a = 'test'; // prints Property: a, Old: 1, New: 'test'
+
+w.unwatch('a');
+
+w.a = 'test2'; // returns 'test2'
+
 ```
 
-Current implentation can't "unwatch" stuff. I'm working on that.
+
