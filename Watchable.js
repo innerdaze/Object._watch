@@ -28,11 +28,19 @@ Watchable = function (props) {
 
     return Object.create(props||{}, {
 
+        /**
+         * @private
+         * @readonly
+         */
         __watchableWatchers: {
             configurable: false,
             value: {}
         },
 
+        /**
+         * @private
+         * @readonly
+         */
         __watchableValues: {
             configurable: false,
             value: {}
@@ -40,6 +48,7 @@ Watchable = function (props) {
 
         /**
          * @private
+         * @readonly
          *
          * Execute callbacks for property change "event"
          *
@@ -62,6 +71,8 @@ Watchable = function (props) {
         },
 
         /**
+         * @readonly
+         *
          * Remove all watchers for #propertyName
          *
          * @param {String} propertyName The property to stop watching
