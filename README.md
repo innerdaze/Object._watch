@@ -12,7 +12,7 @@ If your browser supports Object.defineProperty (it definitely should) then you c
 
 _Will not work in IE8 or lower._
 
-*Currently minifies to 0.929kb*
+**Currently minifies to 0.929kb**
 
 
 ##How to Use
