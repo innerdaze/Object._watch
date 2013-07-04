@@ -58,11 +58,16 @@ var Watchable = function (props) {
          */
         __watchableNotify: {
             configurable: false,
-            value: function (property, oldValue, newValue) {
-                var ln, i = 0,
-                    notifiers = this.__watchableWatchers[property];
+            value: function (property, oldValue, newValue, targetObject) {
+                var notifiers = this.__watchableWatchers[property],
+                    i = 0,
+                    ln;
 
-                if ((ln = notifiers.length)) {
+                    if(targetObject){
+                    notifiers = this.__watchableWatchers.targetObject[property];
+                }
+
+                if ((ln = ln = notifiers.length)) {
                     for (; i < ln; i++) {
                         notifiers[i](property, oldValue, newValue);
                     }
@@ -100,28 +105,44 @@ var Watchable = function (props) {
         _watch: {
             configurable: false,
             value: function (propertyName, callback, scope, targetObject) {
-                var me  = this;
+                var watcherRoot = this.__watchableWatchers,
+                    valueRoot = this.__watchableValues,
+                    me  = this;
 
                 if ((targetObject || this)[propertyName] != undefined) {
-                    this.__watchableValues[propertyName] = (targetObject || this)[propertyName];
+                    valueRoot;
+
+                    if(targetObject){
+                        if(!this.__watchableValues.targetObject){
+                            this.__watchableValues.targetObject = [];
+                        }
+                        valueRoot = this.__watchableValues.targetObject;
+
+                        if(!this.__watchableWatchers.targetObject){
+                            this.__watchableWatchers.targetObject = [];
+                        }
+                        watcherRoot = this.__watchableWatchers.targetObject;
+                    }
+
+                    valueRoot[propertyName] = (targetObject || this)[propertyName];
                 }
 
-                if (!this.__watchableWatchers[propertyName]) {
+                if (!watcherRoot[propertyName]) {
 
-                    this.__watchableWatchers[propertyName] = [];
+                    watcherRoot[propertyName] = [];
 
                     Object.defineProperty(targetObject || this, propertyName, {
                         set: function (value) {
-                            me.__watchableNotify(propertyName, (targetObject || me)[propertyName], value);
-                            me.__watchableValues[propertyName] = value;
+                            me.__watchableNotify(propertyName, (targetObject || me)[propertyName], value, targetObject);
+                            valueRoot[propertyName] = value;
                         },
                         get: function () {
-                            return me.__watchableValues[propertyName];
+                            return valueRoot[propertyName];
                         }
                     });
                 }
 
-                me.__watchableWatchers[propertyName].push(callback.bind(me || scope || null));
+                watcherRoot[propertyName].push(callback.bind(me || scope || null));
             }
         }
     });
