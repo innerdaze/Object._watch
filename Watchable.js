@@ -20,19 +20,30 @@
  * @constructor
  */
 
-var Watchable = function (props) {
+Watchable = function (props) {
 
     return Object.create(props||{}, {
+
         __watchableWatchers: {
             configurable: false,
             value: {}
         },
+
 
         __watchableValues: {
             configurable: false,
             value: {}
         },
 
+        /**
+         * @private
+         *
+         * Execute callbacks for property change "event"
+         *
+         * @param {String} property The property's key
+         * @param {String} oldValue The previous value
+         * @param {String} newValue The new value
+         */
         __watchableNotify: {
             configurable: false,
             value: function (property, oldValue, newValue) {
@@ -47,30 +58,47 @@ var Watchable = function (props) {
             }
         },
 
+        /**
+         * Remove all watchers for #propertyName
+         *
+         * @param {String} propertyName The property to stop watching
+         */
         unwatch: {
             configurable: false,
             value: function(propertyName){
                 this.__watchableWatchers[propertyName] = [];
             }
         },
-        
+
+        /**
+         * @readonly
+         *
+         * Set a callback to be fired whenever #propertyName is changed.
+         * A foreign object can be watched by setting #targetObject.
+         *
+         * @param {String} propertyName The property to watch for change
+         * @param {Function} callback
+         *  The callback to execute whenever #propertyName is changed.
+         *  For list of arguments see {@link #__watchableNotify}
+         * @param {Object} scope The execution scope for the callback
+         * @param {Object} [targetObject] The foreign object to watch
+         */
         watch: {
             configurable: false,
             value: function (propertyName, callback, scope, targetObject) {
-                
                 var me  = this;
-                
-                if ((targetObject||me)[propertyName] != undefined) {
-                    me.__watchableValues[propertyName] = (targetObject||me)[propertyName];
+
+                if ((targetObject || this)[propertyName] != undefined) {
+                    this.__watchableValues[propertyName] = (targetObject || this)[propertyName];
                 }
 
-                if (!me.__watchableWatchers[propertyName]) {
+                if (!this.__watchableWatchers[propertyName]) {
 
-                    me.__watchableWatchers[propertyName] = [];
+                    this.__watchableWatchers[propertyName] = [];
 
-                    Object.defineProperty(targetObject||me, propertyName, {
+                    Object.defineProperty(targetObject || this, propertyName, {
                         set: function (value) {
-                            me.__watchableNotify(propertyName, (targetObject||me)[propertyName], value);
+                            me.__watchableNotify(propertyName, (targetObject || me)[propertyName], value);
                             me.__watchableValues[propertyName] = value;
                         },
                         get: function () {
@@ -79,7 +107,7 @@ var Watchable = function (props) {
                     });
                 }
 
-                me.__watchableWatchers[propertyName].push(callback.bind(me || scope));
+                me.__watchableWatchers[propertyName].push(callback.bind(me || scope || null));
             }
         }
     });
