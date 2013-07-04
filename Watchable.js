@@ -26,7 +26,7 @@ try{ Object.defineProperty({}, 'x', {}) } catch (e){
 
 var Watchable = function (props) {
 
-    return Object.create(props||{}, {
+    return Object.create(props || {}, {
 
         /**
          * @private
