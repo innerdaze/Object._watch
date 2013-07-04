@@ -110,7 +110,6 @@ var Watchable = function (props) {
                     me  = this;
 
                 if ((targetObject || this)[propertyName] != undefined) {
-                    valueRoot;
 
                     if(targetObject){
                         if(!this.__watchableValues.targetObject){
