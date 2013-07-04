@@ -12,6 +12,7 @@ If your browser supports Object.defineProperty (it definitely should) then you c
 
 ##How to Use
 
+#Local Watching
 ```
 var w = new Watchable({a: 1});
 
@@ -29,4 +30,15 @@ w.a = 'test2'; // returns 'test2'
 
 ```
 
+#Remote Watching
+```
+var o = {x: 1};
 
+var w = new Watchable();
+
+w.watch('x', function(property, oldValue, newValue){
+    console.log(property, oldValue, newValue);
+}, null, o); // Note the 4th parameter
+
+o.x = 2; // Logs: x 1 2
+```
