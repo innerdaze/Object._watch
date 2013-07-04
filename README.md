@@ -18,10 +18,10 @@ var w = new Watchable({a: 1});
 print( w.a ); // returns 1;
 
 w.watch('a', function(property, oldValue, newValue){
-    print(property + ' ' + oldValue + ' ' + newValue);
+    print('Property: ' + property + ', Old: ' + oldValue + ', New: ' + newValue);
 });
 
-w.a = 'test'; // returns a 1 'test
+w.a = 'test'; // returns Property: a, Old: 1, New: 'test'
 ```
 
 Current implentation can't "unwatch" stuff. I'm working on that.
