@@ -63,7 +63,7 @@ Watchable = function (props) {
          *
          * @param {String} propertyName The property to stop watching
          */
-        unwatch: {
+        _unwatch: {
             configurable: false,
             value: function(propertyName){
                 this.__watchableWatchers[propertyName] = [];
@@ -79,11 +79,11 @@ Watchable = function (props) {
          * @param {String} propertyName The property to watch for change
          * @param {Function} callback
          *  The callback to execute whenever #propertyName is changed.
-         *  For list of arguments see {@link #__watchableNotify}
-         * @param {Object} scope The execution scope for the callback
+         *  For list of arguments see {@link #__watchableNotify}.
+         * @param {Object} [scope=null] The execution scope for the callback
          * @param {Object} [targetObject] The foreign object to watch
          */
-        watch: {
+        _watch: {
             configurable: false,
             value: function (propertyName, callback, scope, targetObject) {
                 var me  = this;
