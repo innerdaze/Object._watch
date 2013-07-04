@@ -33,7 +33,6 @@ Watchable = function (props) {
             value: {}
         },
 
-
         __watchableValues: {
             configurable: false,
             value: {}
