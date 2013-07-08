@@ -63,7 +63,7 @@ var Watchable = function (props) {
                     i = 0,
                     ln;
 
-                    if(targetObject){
+                if(targetObject){
                     notifiers = this.__watchableWatchers.targetObject[property];
                 }
 
