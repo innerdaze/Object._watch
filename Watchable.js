@@ -20,11 +20,7 @@
  * @constructor
  */
 
-try{ Object.defineProperty({}, 'x', {}) } catch (e){
-    console.warn("Error: You're using a weak browser that doesn't support Object.defineProperty. Write your own workaround.");
-}
-
-var Watchable = function (props) {
+module.exports = Watchable = function (props) {
 
     return Object.create(props || {}, {
 
