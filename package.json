@@ -1,5 +1,5 @@
 {
-  "name": "watchable",
+  "name": "object-watch",
   "version": "1.0.0",
   "description": "Object.watch implementation using ECMAScript 5. Boom.",
   "main": "Watchable.js",
@@ -27,7 +27,8 @@
     "url": "https://github.com/lsdriscoll/Object._watch/issues"
   },
   "homepage": "http://lsdriscoll.github.io/Object._watch/",
-  "devDependencies": {
+	"readmeFilename": "README.md",
+	"devDependencies": {
     "mocha": "~1.17.1",
     "should": "~3.1.2",
     "async": "~0.2.10"
