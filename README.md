@@ -3,17 +3,9 @@ Object._watch
 
 Object property watching using ECMAScript 5
 
+Object.prototype.watch is a coming feature of ECMAScript 6.
 
-Object.prototype.watch is a provided method in Gekko and it's awesome.
-
-But why not spread the love?
-
-If your browser supports Object.defineProperty (it definitely should) then you can have Object.watch too =]
-
-_Will not work in IE8 or lower._
-
-Currently minifies to 1.157kb
-
+But why wait?
 
 ##How to Use
 
