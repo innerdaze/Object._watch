@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/lsdriscoll/Object._watch.git"
+    "url": "https://github.com/lsdriscoll/Object._watch.git"
   },
   "keywords": [
     "Watchable",
@@ -26,7 +26,7 @@
   "bugs": {
     "url": "https://github.com/lsdriscoll/Object._watch/issues"
   },
-  "homepage": "https://github.com/lsdriscoll/Object._watch",
+  "homepage": "http://lsdriscoll.github.io/Object._watch/",
   "devDependencies": {
     "mocha": "~1.17.1",
     "should": "~3.1.2",
