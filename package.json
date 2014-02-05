@@ -1,0 +1,35 @@
+{
+  "name": "watchable",
+  "version": "0.0.0",
+  "description": "Object.watch implementation using ECMAScript 5. Boom.",
+  "main": "Watchable.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/lsdriscoll/Object._watch.git"
+  },
+  "keywords": [
+    "Watchable",
+    "Object.watch",
+    "Object",
+    "Observe",
+    "Observer",
+    "Observable"
+  ],
+  "author": "Lee Driscoll",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/lsdriscoll/Object._watch/issues"
+  },
+  "homepage": "https://github.com/lsdriscoll/Object._watch",
+  "devDependencies": {
+    "mocha": "~1.17.1",
+    "should": "~3.1.2",
+    "async": "~0.2.10"
+  }
+}
